@@ -41,10 +41,19 @@ public class ConfigureRecoveryStrategyTest extends SolrTestCaseJ4 {
     assertEquals("recoveryStrategyBuilder is wrong class (name)",
       expectedClassName, recoveryStrategyBuilder.getClass().getName());
   }
-
+  
+  public void testAlmostAllMethodsAreFinal() throws Exception {}
+  
+  static public class CustomRecoveryStrategy extends RecoveryStrategy {}
+  
+  static public class CustomRecoveryStrategyBuilder extends RecoveryStrategy.Builder {
+    @Override
+    protected RecoveryStrategy new RecoveryStrategy(CoreStrategy(CoreContainer cc, CoreDescriptor cd,
+      RecoveryStrategy.RecoveryListener recoveryListener) {
+    return new CustomRecoveryStrategy(cc, cd, recoveryListener);
+    }
+  }
 }
-
-
 
 ```
 
